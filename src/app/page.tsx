@@ -362,15 +362,6 @@ export default function Home() {
             </div>
           )}
         </div>
-
-        {/* Footer */}
-        <footer
-          className={`py-4 text-center ${
-            darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-600"
-          }`}
-        >
-          <p>Creado por Gabriel Brindo</p>
-        </footer>
       </div>
     </Flowbite>
   );
