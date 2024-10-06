@@ -29,7 +29,7 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false); // Nueva variable
   const [showOpenOptions, setShowOpenOptions] = useState(false); // Para mostrar el modal de opciones
-
+  const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     const storedHistorial = localStorage.getItem("historial");
     if (storedHistorial) {
@@ -59,6 +59,12 @@ export default function Home() {
   const validatePhoneNumber = (number: string) => {
     return /^\d+$/.test(number);
   };
+
+  const filteredHistorial = historial.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.link.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const generateWhatsAppLink = () => {
     if (!phoneNumber.trim()) {
@@ -172,9 +178,9 @@ export default function Home() {
               <input
                 type="tel"
                 id="phoneNumber"
-                className={`w-full px-3 py-2 border ${
-                  darkMode ? "border-gray-600 bg-gray-700" : "border-gray-300"
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                className="w-full px-3 py-2 border 
+                 dark:border-gray-600 dark:bg-gray-700 border-gray-300
+               rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Ej: 5491123456789"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -208,9 +214,9 @@ export default function Home() {
               <input
                 type="text"
                 id="linkName"
-                className={`w-full px-3 py-2 border ${
-                  darkMode ? "border-gray-600 bg-gray-700" : "border-gray-300"
-                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                className="w-full px-3 py-2 border
+                  dark:border-gray-600 dark:bg-gray-700 border-gray-300
+                rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Ej: Verduleria Juancito"
                 value={linkName}
                 onChange={(e) => setLinkName(e.target.value)}
@@ -241,9 +247,8 @@ export default function Home() {
               </button>
               <button
                 onClick={handleGenerateLink}
-                className={`flex-1 border-2 border-green-500 text-green-500 py-2 px-4 rounded-md hover:bg-green-50 dark:hover:bg-green-900 transition duration-300 flex items-center justify-center ${
-                  darkMode ? "dark:text-green-400 dark:border-green-400" : ""
-                }`}
+                className="flex-1 border-2 border-green-500 text-green-500 py-2 px-4 rounded-md hover:bg-green-50 dark:hover:bg-green-900 transition duration-300 flex items-center justify-center 
+                 dark:text-green-400 dark:border-green-400"
               >
                 <LinkIcon className="mr-2" size={20} />
                 Generar enlace
@@ -259,7 +264,7 @@ export default function Home() {
                       <button
                         onClick={() => {
                           window.open(
-                            `whatsapp://send?phone=${phoneNumber}`,
+                            `whatsapp://send?phone=${phoneNumber}&text=${message}`,
                             "_blank"
                           );
                           setShowOpenOptions(false);
@@ -320,8 +325,44 @@ export default function Home() {
           {/* Card del historial */}
           <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md dark:text-white text-gray-900">
             <h2 className="text-xl font-bold mb-4">Historial</h2>
+
+            <label
+              htmlFor="default-search"
+              className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+            >
+              Search
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg
+                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                id="default-search"
+                className=" mb-2 block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Buscar"
+                required
+              />
+            </div>
+
             <ul className="space-y-4">
-              {historial.map((item, index) => (
+              {filteredHistorial.map((item, index) => (
                 <li key={index} className="flex justify-between items-center">
                   <div className="max-w-[70%]">
                     <div content={item.name || "Enlace sin nombre"}>
@@ -396,11 +437,7 @@ export default function Home() {
                 </button>
               </div>
               <img src={qrCode} alt="QR Code" className="w-full" />
-              <p
-                className={`mt-4 text-sm ${
-                  darkMode ? "text-gray-300" : "text-gray-600"
-                } text-center`}
-              >
+              <p className="mt-4 text-sm dark:text-gray-300 text-gray-600 text-center">
                 Escanea este código QR para abrir el enlace de WhatsApp
               </p>
             </div>
