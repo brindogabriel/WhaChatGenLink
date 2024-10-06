@@ -13,6 +13,7 @@ import {
   Moon,
 } from "lucide-react";
 import QRCode from "qrcode";
+import Historial from "./components/Historial";
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -65,6 +66,22 @@ export default function Home() {
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.link.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const getRelativeTime = (timestamp: any) => {
+    const now = Date.now();
+    const diffInSeconds = Math.floor((now - timestamp) / 1000);
+    const rtf = new Intl.RelativeTimeFormat("es", { numeric: "auto" });
+
+    if (diffInSeconds < 60) {
+      return rtf.format(-diffInSeconds, "second");
+    } else if (diffInSeconds < 3600) {
+      return rtf.format(-Math.floor(diffInSeconds / 60), "minute");
+    } else if (diffInSeconds < 86400) {
+      return rtf.format(-Math.floor(diffInSeconds / 3600), "hour");
+    } else {
+      return rtf.format(-Math.floor(diffInSeconds / 86400), "day");
+    }
+  };
 
   const generateWhatsAppLink = () => {
     if (!phoneNumber.trim()) {
@@ -142,6 +159,7 @@ export default function Home() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
@@ -298,9 +316,8 @@ export default function Home() {
             </div>
             {generatedLink && (
               <div
-                className={`mt-4 p-3 ${
-                  darkMode ? "bg-gray-700" : "bg-gray-100"
-                } rounded-md text-sm break-all`}
+                className="mt-4 p-3 dark:bg-gray-700 bg-gray-100
+              rounded-md text-sm break-all"
               >
                 <p className="font-medium mb-1">Enlace generado:</p>
                 <a
@@ -323,7 +340,7 @@ export default function Home() {
           </div>
 
           {/* Card del historial */}
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md dark:text-white text-gray-900">
+          {/* <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md dark:text-white text-gray-900">
             <h2 className="text-xl font-bold mb-4">Historial</h2>
 
             <label
@@ -379,6 +396,9 @@ export default function Home() {
                       >
                         {truncateText(item.link.replace("https://", ""), 30)}
                       </a>
+                      <span className="text-sm">
+                        <p>Creado hace: {getRelativeTime(item.createdAt)}</p>
+                      </span>
                     </div>
                   </div>
                   <div className="flex space-x-2">
@@ -410,7 +430,17 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
+
+          <Historial
+            historial={historial}
+            handleEditName={handleEditName}
+            handleDeleteLink={handleDeleteLink}
+            handleShareLink={handleShareLink}
+            generateQRCode={generateQRCode}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+          />
         </div>
 
         {/* Alerta de enlace copiado */}
