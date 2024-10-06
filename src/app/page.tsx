@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+
 import { useState, useEffect } from "react";
 import {
   Link as LinkIcon,
@@ -13,7 +14,7 @@ import {
   Moon,
 } from "lucide-react";
 import QRCode from "qrcode";
-import { Flowbite } from "flowbite-react";
+import { Flowbite, Tooltip } from "flowbite-react";
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -125,6 +126,11 @@ export default function Home() {
     } catch (err) {
       console.error("Error generating QR code:", err);
     }
+  };
+
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+    return text.substr(0, maxLength) + "...";
   };
 
   return (
@@ -276,20 +282,24 @@ export default function Home() {
               <ul className="space-y-4">
                 {historial.map((item, index) => (
                   <li key={index} className="flex justify-between items-center">
-                    <div>
-                      <p className="text-sm font-medium">
-                        {item.name || "Enlace sin nombre"}
-                      </p>
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-green-500 text-sm hover:underline"
-                      >
-                        {item.link.replace("https://", "")}
-                      </a>
+                    <div className="max-w-[70%]">
+                      <Tooltip content={item.name || "Enlace sin nombre"}>
+                        <p className="text-sm font-medium truncate">
+                          {truncateText(item.name || "Enlace sin nombre", 30)}
+                        </p>
+                      </Tooltip>
+                      <Tooltip content={item.link}>
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-green-500 text-sm hover:underline truncate block"
+                        >
+                          {truncateText(item.link.replace("https://", ""), 30)}
+                        </a>
+                      </Tooltip>
                     </div>
-                    <div className="flex space-x-6">
+                    <div className="flex space-x-2">
                       <button
                         onClick={() => handleEditName(index)}
                         className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
