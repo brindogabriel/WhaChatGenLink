@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import {
   Link as LinkIcon,
-  Edit,
-  Trash2,
-  Share2,
+  // Edit,
+  // Trash2,
+  // Share2,
   CheckCircle,
   QrCode,
   X,
@@ -61,27 +61,27 @@ export default function Home() {
     return /^\d+$/.test(number);
   };
 
-  const filteredHistorial = historial.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.link.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredHistorial = historial.filter(
+  //   (item) =>
+  //     item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     item.link.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
-  const getRelativeTime = (timestamp: any) => {
-    const now = Date.now();
-    const diffInSeconds = Math.floor((now - timestamp) / 1000);
-    const rtf = new Intl.RelativeTimeFormat("es", { numeric: "auto" });
+  // const getRelativeTime = (timestamp: any) => {
+  //   const now = Date.now();
+  //   const diffInSeconds = Math.floor((now - timestamp) / 1000);
+  //   const rtf = new Intl.RelativeTimeFormat("es", { numeric: "auto" });
 
-    if (diffInSeconds < 60) {
-      return rtf.format(-diffInSeconds, "second");
-    } else if (diffInSeconds < 3600) {
-      return rtf.format(-Math.floor(diffInSeconds / 60), "minute");
-    } else if (diffInSeconds < 86400) {
-      return rtf.format(-Math.floor(diffInSeconds / 3600), "hour");
-    } else {
-      return rtf.format(-Math.floor(diffInSeconds / 86400), "day");
-    }
-  };
+  //   if (diffInSeconds < 60) {
+  //     return rtf.format(-diffInSeconds, "second");
+  //   } else if (diffInSeconds < 3600) {
+  //     return rtf.format(-Math.floor(diffInSeconds / 60), "minute");
+  //   } else if (diffInSeconds < 86400) {
+  //     return rtf.format(-Math.floor(diffInSeconds / 3600), "hour");
+  //   } else {
+  //     return rtf.format(-Math.floor(diffInSeconds / 86400), "day");
+  //   }
+  // };
 
   const generateWhatsAppLink = () => {
     if (!phoneNumber.trim()) {
