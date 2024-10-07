@@ -15,8 +15,15 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Generador de Links de chats de whatsApp",
-  description: "Generador de Links de chats de whatsApp",
+  title: "Generador de Links para WhatsApp | Crea Chats Fáciles",
+  description:
+    "Generá fácilmente links personalizados para iniciar chats de WhatsApp sin tener que guardar el número. Ideal para negocios y atención al cliente.",
+  keywords: [
+    "Generador de links WhatsApp",
+    "crear chat WhatsApp",
+    "link personalizado WhatsApp",
+    "atención al cliente WhatsApp",
+  ],
 };
 
 export default function RootLayout({
