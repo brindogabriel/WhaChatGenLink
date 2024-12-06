@@ -12,7 +12,7 @@ import Historial from "./components/Historial";
 import { generateWhatsAppUrl, validatePhoneNumber } from "./utils/whatsapp";
 
 export default function Home() {
-  const [selectedCountry, setSelectedCountry] = useState<Country>(countries[0]);
+  const [selectedCountry, setSelectedCountry] = useState<Country>(countries[7]);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
   const [linkName, setLinkName] = useState("");
@@ -123,7 +123,7 @@ export default function Home() {
       setQrCode(qr);
       setShowQrModal(true);
     } catch (err) {
-      console.error("Error generating QR code:", err);
+      console.error("Error al generar el QR:", err);
     }
   };
 
