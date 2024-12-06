@@ -1,0 +1,27 @@
+import type { Country } from '../types';
+
+export const countries: Country[] = [
+  { name: 'Afghanistan', dialCode: '93', code: 'AF' },
+  { name: 'Albania', dialCode: '355', code: 'AL' },
+  { name: 'Algeria', dialCode: '213', code: 'DZ' },
+  { name: 'American Samoa', dialCode: '1684', code: 'AS' },
+  { name: 'Andorra', dialCode: '376', code: 'AD' },
+  { name: 'Angola', dialCode: '244', code: 'AO' },
+  { name: 'Anguilla', dialCode: '1264', code: 'AI' },
+  { name: 'Argentina', dialCode: '54', code: 'AR' },
+  { name: 'Armenia', dialCode: '374', code: 'AM' },
+  { name: 'Australia', dialCode: '61', code: 'AU' },
+  { name: 'Austria', dialCode: '43', code: 'AT' },
+  { name: 'Brazil', dialCode: '55', code: 'BR' },
+  { name: 'Canada', dialCode: '1', code: 'CA' },
+  { name: 'China', dialCode: '86', code: 'CN' },
+  { name: 'France', dialCode: '33', code: 'FR' },
+  { name: 'Germany', dialCode: '49', code: 'DE' },
+  { name: 'India', dialCode: '91', code: 'IN' },
+  { name: 'Italy', dialCode: '39', code: 'IT' },
+  { name: 'Japan', dialCode: '81', code: 'JP' },
+  { name: 'Mexico', dialCode: '52', code: 'MX' },
+  { name: 'Spain', dialCode: '34', code: 'ES' },
+  { name: 'United Kingdom', dialCode: '44', code: 'GB' },
+  { name: 'United States', dialCode: '1', code: 'US' },
+];

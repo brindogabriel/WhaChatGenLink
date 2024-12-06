@@ -20,14 +20,14 @@ const Historial: React.FC<HistorialProps> = ({
   searchTerm,
   setSearchTerm,
 }) => {
-  const [, setTick] = useState(0); // Notamos que no usamos el valor de estado
+  const [, setTick] = useState(0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTick((prev) => prev + 1); // Actualiza solo para forzar el re-render
+      setTick((prev) => prev + 1);
     }, 1000);
 
-    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar
+    return () => clearInterval(intervalId);
   }, []);
 
   const filteredHistorial = historial.filter(
