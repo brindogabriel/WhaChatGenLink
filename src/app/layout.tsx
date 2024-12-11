@@ -15,15 +15,40 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Generador de Links para WhatsApp | Crea Chats Fáciles",
-  description:
-    "Generá fácilmente links personalizados para iniciar chats de WhatsApp sin tener que guardar el número. Ideal para negocios y atención al cliente.",
-  keywords: [
-    "Generador de links WhatsApp",
-    "crear chat WhatsApp",
-    "link personalizado WhatsApp",
-    "atención al cliente WhatsApp",
-  ],
+  title: "WhaChatGenLink",
+  description: "Envia whatsapp sin agendar el numero",
+  keywords: "whatsapp, enviar whatsapp sin agendar",
+  robots: "index, follow",
+
+  openGraph: {
+    locale: "es_AR",
+    title: "WhaChatGenLink",
+    description: "Envia whatsapp sin agendar el numero",
+    url: "https://wha-chat-gen-link.vercel.app/",
+    siteName: "Gabriel Brindo",
+    images: [
+      {
+        url: "https://wha-chat-gen-link.vercel.app/favicon.ico",
+        width: 1200,
+        height: 630,
+        alt: "Logo",
+      },
+    ],
+
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WhaChatGenLink",
+    description: "Envia whatsapp sin agendar el numero",
+    images: ["https://wha-chat-gen-link.vercel.app/favicon.ico"],
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+  applicationName: "WhaChatGenLink",
 };
 
 export default function RootLayout({
