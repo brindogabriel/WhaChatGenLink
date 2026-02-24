@@ -23,7 +23,7 @@ export function CountrySelector({
   );
 
   return (
-    <div className="relative">
+    <div className="relative dark:text-black ">
       <button
         type="button"
         className="flex items-center gap-2 px-3 py-2 border rounded-lg hover:bg-gray-50"
