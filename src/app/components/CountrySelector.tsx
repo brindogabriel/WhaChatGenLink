@@ -23,10 +23,10 @@ export function CountrySelector({
   );
 
   return (
-    <div className="relative dark:text-black ">
+    <div className="relative dark:text-black">
       <button
         type="button"
-        className="flex items-center gap-2 px-3 py-2 border rounded-lg hover:bg-gray-50"
+        className="flex items-center gap-2 px-3 py-2 border dark:border-gray-600 dark:bg-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="w-6 h-4 overflow-hidden">
@@ -36,7 +36,9 @@ export function CountrySelector({
             className="h-full w-full object-cover"
           />
         </span>
-        <span className="text-gray-600">+{selectedCountry.dialCode}</span>
+        <span className="dark:text-white text-dark-gray-900">
+          +{selectedCountry.dialCode}
+        </span>
         <ChevronDown className="w-4 h-4 text-gray-400" />
       </button>
 
