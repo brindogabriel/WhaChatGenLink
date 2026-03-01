@@ -129,7 +129,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col dark:bg-gray-900 bg-gray-100 transition-colors duration-200">
-      <div className="container mx-auto p-4 flex-grow">
+      <div className="container mx-auto p-4 grow">
         <div className="flex justify-end mb-4">
           <button
             onClick={toggleDarkMode}
