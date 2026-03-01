@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Sun, Moon } from "lucide-react";
 import QRCode from "qrcode";
 import { WhatsAppForm } from "./components/WhatsAppForm";
 import { WhatsAppModal } from "./components/WhatsAppModal";
@@ -24,7 +23,6 @@ export default function Home() {
   >([]);
   const [qrCode, setQrCode] = useState("");
   const [showQrModal, setShowQrModal] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [showOpenOptions, setShowOpenOptions] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,12 +32,7 @@ export default function Home() {
     if (storedHistorial) {
       setHistorial(JSON.parse(storedHistorial));
     }
-    const isDarkMode = localStorage.getItem("darkMode") === "true";
-    setDarkMode(isDarkMode);
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    }
-
+ 
     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
     setIsDesktop(!isMobile);
   }, []);
@@ -47,12 +40,6 @@ export default function Home() {
   useEffect(() => {
     localStorage.setItem("whatsappHistorial", JSON.stringify(historial));
   }, [historial]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle("dark");
-    localStorage.setItem("darkMode", (!darkMode).toString());
-  };
 
   const validateAndGenerateLink = () => {
     if (!phoneNumber.trim()) {
@@ -130,14 +117,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col dark:bg-gray-900 bg-gray-100 transition-colors duration-200">
       <div className="container mx-auto p-4 grow">
-        <div className="flex justify-end mb-4">
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
-          >
-            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-        </div>
+       
         <div className="flex flex-col md:flex-row items-start justify-center space-y-4 md:space-y-0 md:space-x-6">
           <WhatsAppForm
             selectedCountry={selectedCountry}
